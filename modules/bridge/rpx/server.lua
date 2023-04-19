@@ -68,9 +68,8 @@ SetTimeout(2000, function()
 		local character = RPX.GetPlayer(id)
 		if character then
 			character.identifier = character.citizenid
-			character.name = character.fullname
-			character.dateofbirth = character.age
-			character.source = tonumber(id)
+			character.name = character.name
+			character.dateofbirth = character.charinfo.age
 			server.setPlayerInventory(character)
 			Inventory.SetItem(character.source, "money", character?.money.cash)
 		end
