@@ -1,8 +1,8 @@
 if not lib then return end
 
 local Query = {
-	SELECT_STASH = 'SELECT data FROM rpx-inventory WHERE owner = ? AND name = ?',
-	UPDATE_STASH = 'INSERT INTO rpx-inventory (owner, name, data) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE data = VALUES(data)',
+	SELECT_STASH = 'SELECT data FROM inventory_stashes WHERE owner = ? AND name = ?',
+	UPDATE_STASH = 'INSERT INTO inventory_stashes (owner, name, data) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE data = VALUES(data)',
 	SELECT_PLAYER = 'SELECT inventory FROM `{user_table}` WHERE `{user_column}` = ?',
 	UPDATE_PLAYER = 'UPDATE `{user_table}` SET inventory = ? WHERE `{user_column}` = ?',
 }
@@ -21,10 +21,10 @@ Citizen.CreateThreadNow(function()
 
 	Wait(0)
 
-	local success, result = pcall(MySQL.scalar.await, 'SELECT 1 FROM rpx-inventory')
+	local success, result = pcall(MySQL.scalar.await, 'SELECT 1 FROM inventory_stashes')
 
 	if not success then
-		MySQL.query([[CREATE TABLE `rpx-inventory` (
+		MySQL.query([[CREATE TABLE `inventory_stashes` (
 			`owner` varchar(60) DEFAULT NULL,
 			`name` varchar(100) NOT NULL,
 			`data` longtext DEFAULT NULL,
