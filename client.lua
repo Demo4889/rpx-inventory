@@ -558,10 +558,12 @@ local function registerCommands()
 		end
 	})
 
+	--[[
+
 	lib.addKeybind({
 		name = 'reloadweapon',
 		description = locale('reload_weapon'),
-		hash = 0xE30CD707 --[[ R ]],
+		hash = 0xE30CD707,
 		onPressed = function(self)
 			if not currentWeapon or not canUseItem(true) then return end
 
@@ -577,7 +579,7 @@ local function registerCommands()
 				end
 			end
 		end
-	})
+	})]]
 
 	lib.addKeybind({
 		name = 'hotbar',
