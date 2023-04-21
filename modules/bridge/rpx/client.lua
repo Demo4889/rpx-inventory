@@ -6,17 +6,20 @@ AddStateBagChangeHandler("job", nil, function(bagName, key, value)
     if GetPlayerFromStateBagName(bagName) ~= PlayerId() then return end
 	local plyState = LocalPlayer.state
 	local PlayerData = {}
+	PlayerData.groups = {}
     PlayerData.groups[plyState.job.name] = plyState.job.rank
 	OnPlayerData("groups", PlayerData.groups)
 end)
 
+--[[
 AddStateBagChangeHandler("gang", nil, function(bagName, key, value) 
     if GetPlayerFromStateBagName(bagName) ~= PlayerId() then return end
 	local plyState = LocalPlayer.state
 	local PlayerData = {}
+	PlayerData.groups = {}
     PlayerData.groups[plyState.gang.name] = plyState.gang.rank
 	OnPlayerData("groups", PlayerData.groups)
-end)
+end)]]
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function client.setPlayerStatus(values)
