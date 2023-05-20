@@ -1118,6 +1118,7 @@ RegisterNetEvent('rpx-inventory:setPlayerInventory', function(currentDrops, inve
 
 	local playerId = cache.playerId
 	local EnableKeys = client.enablekeys
+	local EnableKeysTable = client.enablekeystable
 	local DisableAllControlActions = DisableAllControlActions
 	local HideHudAndRadarThisFrame = HideHudAndRadarThisFrame
 	local EnableControlAction = EnableControlAction
@@ -1132,8 +1133,12 @@ RegisterNetEvent('rpx-inventory:setPlayerInventory', function(currentDrops, inve
 			DisableAllControlActions(0)
 			HideHudAndRadarThisFrame()
 
-			for i = 1, #EnableKeys do
-				EnableControlAction(0, EnableKeys[i], true)
+			if EnableKeysTable == true then
+				for i = 1, #EnableKeys do
+					EnableControlAction(0, EnableKeys[i], true)
+				end
+			else
+				EnableControlAction(0, 0xE6360A8E, true)
 			end
 
 			if currentInventory.type == 'newdrop' then
