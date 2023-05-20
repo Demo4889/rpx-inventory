@@ -38,10 +38,7 @@ function Weapon.Equip(item, data)
 
 	local maxClip = GetMaxAmmoInClip(playerPed, data.hash, true)
 
-	local _, weaponHash = GetCurrentPedWeapon(PlayerPedId(), false, 0, false)
-	Citizen.InvokeNative(0x5E3BDDBCB83F3D84, PlayerPedId(), data.hash, 1, 1, 1, 2, false, 0.5, 1.0, 752097756, 0, true, 0.0)
-	Citizen.InvokeNative(0x5E3BDDBCB83F3D84, PlayerPedId(), data.hash, 1, 1, 1, 3, false, 0.5, 1.0, 752097756, 0, true, 0.0)
-	Citizen.InvokeNative(0xADF692B254977C0C, PlayerPedId(), data.hash, 0, 1, 0, 0)
+	Citizen.InvokeNative(0x5E3BDDBCB83F3D84, PlayerPedId(), data.hash, 1, 1, 1, 0, false, 0.5, 1.0, 752097756, 0, true, 0.0)
 	Citizen.InvokeNative(0xADF692B254977C0C, PlayerPedId(), data.hash, 0, 0, 0, 0)
 
 	SetPedAmmo(playerPed, data.hash, ammo - maxClip)
