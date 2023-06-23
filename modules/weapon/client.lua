@@ -31,18 +31,17 @@ function Weapon.Equip(item, data)
 	-- Refilling without a timeout tends to lead to the weapon jamming
 	--SetTimeout(0, function() RefillAmmoInstantly(playerPed) end)
 
-	SetPedAmmo(playerPed, data.hash, ammo)
-	SetAmmoInClip(playerPed, data.hash, 0)
+	--[[SetPedAmmo(playerPed, data.hash, ammo)
+	SetAmmoInClip(playerPed, data.hash, 0)]]
 
 	-- Makes the player reload every time in RDR3, we can get around this, but it enables a quick reload
+	local maxClip = GetMaxAmmoInClip(playerPed, data.hash, true)
 
-	-- local maxClip = GetMaxAmmoInClip(playerPed, data.hash, true)
-	
 	Citizen.InvokeNative(0x5E3BDDBCB83F3D84, PlayerPedId(), data.hash, 1, 1, 1, 0, false, 0.5, 1.0, 752097756, 0, true, 0.0)
-	Citizen.InvokeNative(0xADF692B254977C0C, PlayerPedId(), data.hash, 0, 1, 0, 0)
+	Citizen.InvokeNative(0xADF692B254977C0C, PlayerPedId(), data.hash, 0, 0, 0, 0)
 
-	-- SetPedAmmo(playerPed, data.hash, ammo - maxClip)
-	-- SetAmmoInClip(playerPed, data.hash, maxClip)
+	SetPedAmmo(playerPed, data.hash, ammo - maxClip)
+	SetAmmoInClip(playerPed, data.hash, maxClip)
 
 	TriggerEvent('rpx-inventory:currentWeapon', item)
 	Utils.ItemNotify({ item, 'ui_equipped' })
