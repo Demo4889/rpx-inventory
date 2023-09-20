@@ -4,10 +4,10 @@ RegisterNetEvent('ox:playerLogout', onLogout)
 
 AddStateBagChangeHandler("job", nil, function(bagName, key, value) 
     if GetPlayerFromStateBagName(bagName) ~= PlayerId() then return end
-	local plyState = LocalPlayer.state
+	local plyState = value
 	local PlayerData = {}
 	PlayerData.groups = {}
-    PlayerData.groups[plyState.job.name] = plyState.job.rank
+    PlayerData.groups[value.name] = value.rank
 	OnPlayerData("groups", PlayerData.groups)
 end)
 
