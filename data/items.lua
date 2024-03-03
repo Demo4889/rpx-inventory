@@ -39,7 +39,7 @@ return {
 		close = true,
 		description = "A gold pan to find precious gold",
 	},
-	['goldnugget'] = {
+	['provision_gold_nugget'] = {
 		label = 'Gold Nugget',
 		weight = 10,
 		stack = true,

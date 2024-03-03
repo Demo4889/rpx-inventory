@@ -16,11 +16,25 @@ return {
 		blip = {
 			id = 1475879922, colour = 69, scale = 0.8
 		}, inventory = {
-			{ name = 'water', price = 1 },
-			{ name = 'bread', price = 1 },
-			{ name = 'goldpan', price = 5 },
-			{ name = 'campkit', price = 25 },
-			{ name = 'campsupplies', price = 2 },
+			{ name = 'consumable_apple', price = 1 },
+			{ name = 'consumable_apricots_can', price = 2 },
+			{ name = 'consumable_baked_beans_can', price = 2 },
+			{ name = 'consumable_biscuit_box', price = 1 },
+			{ name = 'consumable_candy_bag', price = 2 },
+			{ name = 'consumable_chocolate_bar', price = 1 },
+			{ name = 'consumable_cornedbeef_can', price = 2 },
+			{ name = 'consumable_crackers', price = 1 },
+			{ name = 'consumable_kidneybeans_can', price = 2 },
+			{ name = 'consumable_peaches_can', price = 2 },
+			{ name = 'consumable_peas_can', price = 2 },
+			{ name = 'consumable_salmon_can', price = 5 },
+			{ name = 'consumable_strawberries_can', price = 2 },
+			{ name = 'consumable_beets', price = 1 },
+			{ name = 'consumable_carrot', price = 1 },
+			{ name = 'consumable_celery', price = 1 },
+			{ name = 'consumable_corn', price = 1 },
+			{ name = 'consumable_peach', price = 1 },
+			{ name = 'consumable_pear', price = 1 },
 		}, targets = {
 			{ ped = "u_m_m_sdexoticsshopkeeper_01", loc = vec3(1330.36 , -1292.74, 77.02)  , heading = 65.0, distance = 2.0 }, -- Rhodes
 			{ ped = "u_m_m_sdexoticsshopkeeper_01", loc = vec3(2824.44 , -1319.39, 46.75)  , heading = 320.0, distance = 2.0 }, -- Saint Denis
