@@ -32,6 +32,8 @@ function client.setPlayerStatus(values)
 			TriggerServerEvent('RPX:SetThirst', plyState.metadata.thirst + value)
 		elseif name == "stress" then
 			TriggerServerEvent('RPX:SetStress', plyState.metadata.stress + value)
+		elseif name == "drunk" then
+			TriggerServerEvent('RPX:SetDrunk', plyState.metadata.drunk + value)
 		end
 	end
 end

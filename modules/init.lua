@@ -162,8 +162,9 @@ end
 if shared.target then
 	local ox_target = GetResourceState('ox_target'):find('start')
 	local qtarget = GetResourceState('qtarget'):find('start')
+	local metatarget = GetResourceState('meta_target'):find('start')
 
-	if not ox_target and not qtarget then
+	if not ox_target and not qtarget and not metatarget then
 		shared.target = false
 		warn('targeting resource is not loaded - it should start before rpx-inventory')
 	else
