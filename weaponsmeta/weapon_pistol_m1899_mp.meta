@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Infos targetBlob="dlc_content_extra - M1899 Pistol"> 
+<CWeaponInfo>
+    <Name>WEAPON_PISTOL_M1899</Name>
+	<WeaponHeadShotDistance>
+        <MinHeadShotDistanceAI value="1.000000" />
+        <MaxHeadShotDistanceAI value="150.000000" />
+        <MinHeadShotDistancePlayer value="0.000000" />
+        <MaxHeadShotDistancePlayer value="70.000000" />
+    </WeaponHeadShotDistance>
+	<WeaponDamageModifiers>
+        <PlayerDamagedByPlayerModifier value="1.850000" />
+        <PlayerDamagedByAIModifier value="1.400000" />
+        <AIDamagedByPlayerModifier value="1.000000" />
+    </WeaponDamageModifiers>
+  </CWeaponInfo>
+</Infos>

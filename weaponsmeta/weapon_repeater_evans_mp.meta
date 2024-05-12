@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Infos targetBlob="mp003 - Evans Repeater"> 
+
+  <CWeaponInfo>
+    <Name>WEAPON_REPEATER_EVANS</Name>
+    <DamageModes>
+      <Item>
+        <Name>DM_REPEATER</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_HIGH_VELOCITY</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_SPLIT_POINT</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_EXPRESS</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_EXPRESS_EXPLOSIVE</Name>
+		<PlayerDamagedByPlayerModifier value="1.400000" />
+      </Item>
+    </DamageModes>
+	<WeaponHeadShotDistance>
+        <MinHeadShotDistanceAI value="1.000000" />
+        <MaxHeadShotDistanceAI value="150.000000" />
+        <MinHeadShotDistancePlayer value="0.000000" />
+        <MaxHeadShotDistancePlayer value="90.000000" />
+		<MaxHeadShotDistanceToPlayerWithScope value="1000.000000" />
+    </WeaponHeadShotDistance>
+	<WeaponDamageModifiers>
+        <PlayerDamagedByPlayerModifier value="1.625000" />
+        <PlayerDamagedByAIModifier value="1.400000" />
+        <AIDamagedByPlayerModifier value="1.000000" />
+    </WeaponDamageModifiers>
+  </CWeaponInfo>
+
+</Infos>

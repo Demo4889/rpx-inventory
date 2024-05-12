@@ -51,7 +51,11 @@ local isServer = IsDuplicityVersion()
 
 ---@param data OxItem
 local function newItem(data)
-	data.weight = data.weight or 0
+	if data.weight == nil then
+		data.weight = 0
+	else
+		data.weight = data.weight * 1000
+	end
 
 	if data.close == nil then
 		data.close = true
@@ -112,19 +116,26 @@ for type, data in pairs(data('weapons')) do
 			v.stack = v.throwable and true or false
 			v.durability = v.durability or 0.05
 			v.weapon = true
+			v.type = 'weapon'
 		else
 			v.stack = true
 		end
 
 		v[type == 'Ammo' and 'ammo' or 'weapon'] = true
+		local clientData, serverData = v.client, v.server
+		---@cast clientData -nil
+		---@cast serverData -nil
 
-		if isServer then v.client = nil else
+		if not v.client then v.client = {} end
+
+		if v.image then v.client.image = v.image end
+		if isServer then
+			v.client = nil
+		else
 			v.count = 0
 			v.server = nil
-			local clientData = v.client
-
 			if clientData?.image then
-				clientData.image = clientData.image:match('^[%w]+://') and ('url(%s)'):format(clientData.image) or ('url(%s/%s)'):format(client.imagepath, clientData.image)
+				clientData.image = clientData.image:match('^[%w]+://') and ('url(%s)'):format(clientData.image) or ('url(%s/%s)'):format(clientData.imagepath, clientData.image)
 			end
 		end
 		ItemList[k] = v
@@ -136,13 +147,6 @@ for k, v in pairs(data 'items') do
 	newItem(v)
 end
 
-for k, v in pairs(GlobalState.Shared_Items) do
-	v.name = k
-	newItem(v)
-end
-
-
 ItemList.cash = ItemList.money
 
 return ItemList
-

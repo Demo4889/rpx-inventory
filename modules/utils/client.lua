@@ -98,11 +98,14 @@ end
 -- Enables the weapon wheel, but disables the use of inventory items
 -- Mostly used for weaponised vehicles, though could be called for "minigames"
 function Utils.WeaponWheel(state)
-	if state == nil then state = EnableWeaponWheel end
-
-	EnableWeaponWheel = state
-	SetWeaponsNoAutoswap(not state)
-	SetWeaponsNoAutoreload(not state)
+	if state == nil then
+		state = false
+	else
+		state = true
+	end
+	print("state", state)
+	-- SetWeaponsNoAutoswap(state)
+	-- SetWeaponsNoAutoreload(state)
 end
 exports('weaponWheel', Utils.WeaponWheel)
 

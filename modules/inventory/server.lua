@@ -1802,14 +1802,12 @@ RegisterServerEvent('rpx-inventory:updateWeapon', function(action, value, slot, 
 			end
 
 			if action == 'load' and weapon.metadata.durability > 0 then
-				local ammo = Items(weapon.name).ammoname
-				local diff = value - weapon.metadata.ammo
+				local ammo = Items(weapon.name).ammotype
 
-				if Inventory.RemoveItem(inventory, ammo, 1, specialAmmo) then
-					weapon.metadata.ammo = value
-					weapon.metadata.specialAmmo = specialAmmo
-					weapon.weight = Inventory.SlotWeight(item, weapon)
-				end
+				Inventory.RemoveItem(inventory, ammo, 1, specialAmmo)
+				weapon.metadata.ammo = value
+				weapon.metadata.specialAmmo = specialAmmo
+				weapon.weight = Inventory.SlotWeight(item, weapon)
 			elseif action == 'throw' then
 				Inventory.RemoveItem(inventory, weapon.name, 1, weapon.metadata, weapon.slot)
 			elseif action == 'component' then

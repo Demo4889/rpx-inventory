@@ -33,6 +33,7 @@
   "inventory_right_access": "You can not open this inventory",
   "inventory_lost_access": "No longer able to access this inventory",
   "wrong_ammo": "You can't load the %s with %s ammo",
+  "too_much_ammo": "You cannot load that much ammo",
   "license": "%s License",
   "already_have": "You already have a %s",
   "have_purchased": "You have purchased a %s",

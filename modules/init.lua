@@ -9,7 +9,7 @@ shared = {
 	playerslots = GetConvarInt('inventory:slots', 50),
 	playerweight = GetConvarInt('inventory:weight', 30000),
 	target = GetConvarInt('inventory:target', 1) == 1,
-	police = json.decode(GetConvar('inventory:police', '["police", "sheriff"]')),
+	police = json.decode(GetConvar('inventory:police', '["sheriff"]')),
 }
 
 do

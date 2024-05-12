@@ -38,7 +38,7 @@ local playerPed = cache.ped
 
 lib.onCache('ped', function(ped)
 	playerPed = ped
-	Utils.WeaponWheel()
+	-- Utils.WeaponWheel()
 end)
 
 plyState:set('invBusy', true, false)
@@ -235,6 +235,7 @@ exports('openInventory', client.openInventory)
 
 local Animations = data 'animations'
 local Items = require 'modules.items.client'
+local Weapons = require 'modules.weapon.client'
 
 lib.callback.register('rpx-inventory:usingItem', function(data)
 	local item = Items[data.name]
@@ -352,7 +353,6 @@ local function useSlot(slot)
 	local data = Items[item.name]
 
 	if not data then return end
-
 	if canUseItem(data.ammo and true) then
 		if data.component and not currentWeapon then
 			return lib.notify({ id = 'weapon_hand_required', type = 'error', description = locale('weapon_hand_required') })
@@ -389,7 +389,7 @@ local function useSlot(slot)
 
 		if data.effect then
 			data:effect({name = item.name, slot = item.slot, metadata = item.metadata})
-		elseif data.weapon then
+		elseif data.type == 'weapon' then
 			if EnableWeaponWheel then return end
 
 			useItem(data, function(result)
@@ -408,40 +408,57 @@ local function useSlot(slot)
 				end
 			end)
 		elseif currentWeapon then
-
-			if data.ammo then
-				if EnableWeaponWheel or currentWeapon.metadata.durability <= 0 then return end
+			if data.ammotype then
+				if EnableWeaponWheel then return end
 				local currentAmmo = GetAmmoInPedWeapon(playerPed, currentWeapon.hash)
 				local _, maxAmmo = GetMaxAmmo(playerPed, currentWeapon.hash)
 
-				--if currentAmmo == clipSize then return end
+				if currentAmmo == maxAmmo then return end
 				useItem(data, function(resp)
-					if not resp or resp.name ~= currentWeapon?.ammo then print(resp.name, currentWeapon?.ammo) return end
+					local ammoType = GetAmmoTypeForWeapon(playerPed, currentWeapon.hash)
+					if ammoType == 0 then
+						local newAmmo = currentAmmo + data.amount
+						if newAmmo > maxAmmo then return lib.notify({ title = 'Inventory - Weapon Loading', type = 'error', description = locale('too_much_ammo') }) end
+						Citizen.InvokeNative(0xB190BCA3F4042F95, playerPed, currentWeapon.hash, newAmmo)
+						Wait(100)
+						SetAmmoInClip(playerPed, currentWeapon.hash, 0)
+						Citizen.InvokeNative(0x79E1E511FF7EFB13, playerPed)
 
-					currentAmmo = GetAmmoInPedWeapon(playerPed, currentWeapon.hash)
-					local addAmmo = 25
-					local newAmmo = currentAmmo + addAmmo
+						SetTimeout(100, function()
+							while IsPedReloading(playerPed) do
+								DisableControlAction(0, `INPUT_RELOAD`, true)
+								Wait(0)
+							end
+						end)
+						currentWeapon.metadata.ammotype = newAmmo
 
-					--if newAmmo == currentAmmo then print("SAME") return end
-					Citizen.InvokeNative(0xB190BCA3F4042F95, playerPed, currentWeapon.hash, addAmmo)
-					Wait(100)
-					SetAmmoInClip(playerPed, currentWeapon.hash, 0)
-					Citizen.InvokeNative(0x79E1E511FF7EFB13, playerPed)
+						TriggerServerEvent('rpx-inventory:updateWeapon', 'load', currentWeapon.metadata.ammotype, false, currentWeapon.metadata.specialAmmo)
+					else
+						if not resp or (resp.name ~= ammoType) or (ammoType == nil) then print('something is wrong with the ammo on line 421 of rpx-inventory/client.lua') return end
 
-					SetTimeout(100, function()
-						while IsPedReloading(playerPed) do
-							DisableControlAction(0, `INPUT_RELOAD`, true)
-							Wait(0)
-						end
-					end)
-					currentWeapon.metadata.ammo = newAmmo
+						local addAmmo = GetMaxAmmoInClip(playerPed, currentWeapon.hash)
+						local newAmmo = currentAmmo + addAmmo
 
-					TriggerServerEvent('rpx-inventory:updateWeapon', 'load', currentWeapon.metadata.ammo, false, currentWeapon.metadata.specialAmmo)
+						Citizen.InvokeNative(0xB190BCA3F4042F95, playerPed, currentWeapon.hash, addAmmo)
+						Wait(100)
+						SetAmmoInClip(playerPed, currentWeapon.hash, 0)
+						Citizen.InvokeNative(0x79E1E511FF7EFB13, playerPed)
+
+						SetTimeout(100, function()
+							while IsPedReloading(playerPed) do
+								DisableControlAction(0, `INPUT_RELOAD`, true)
+								Wait(0)
+							end
+						end)
+						currentWeapon.metadata.ammotype = newAmmo
+
+						TriggerServerEvent('rpx-inventory:updateWeapon', 'load', currentWeapon.metadata.ammotype, false, currentWeapon.metadata.specialAmmo)
+					end
 				end)
 			elseif data.allowArmed then
 				useItem(data)
 			end
-		elseif not data.ammo and not data.component and not data.weapon then
+		elseif not data.ammotype and not data.component and not data.weapon then
 			useItem(data)
 		end
 	end
@@ -487,7 +504,7 @@ function OnPlayerData(key, val)
 		client.closeInventory()
 	end
 
-	Utils.WeaponWheel()
+	-- Utils.WeaponWheel()
 end
 
 -- People consistently ignore errors when one of the "modules" failed to load
@@ -516,10 +533,10 @@ local function registerCommands()
 					return client.openInventory(closest.inv or 'drop', { id = closest.invId, type = closest.type })
 				end
 			end
-
 			return client.openInventory()
 		end
 	})
+
 
 	local Vehicles = data 'vehicles'
 
@@ -614,6 +631,8 @@ local function registerCommands()
 			end
 		})
 	end
+
+	registerCommands = nil
 end
 
 function client.closeInventory(server)
@@ -742,7 +761,6 @@ RegisterNetEvent('rpx-inventory:updateSlots', function(items, weights, count, re
 		item.metadata.ammo = currentWeapon.metadata.ammo
 		item.metadata.durability = currentWeapon.metadata.durability
 		currentWeapon.metadata = item.metadata
-		TriggerEvent('rpx-inventory:currentWeapon', currentWeapon)
 	end
 
 	if count then
@@ -915,7 +933,7 @@ local function setStateBagHandler(stateId)
 	end)
 
 	AddStateBagChangeHandler('dead', stateId, function(_, _, value)
-		Utils.WeaponWheel()
+		-- Utils.WeaponWheel()
 		PlayerData.dead = value
 	end)
 
@@ -927,7 +945,7 @@ local function setStateBagHandler(stateId)
 end
 
 lib.onCache('seat', function(seat)
-	Utils.WeaponWheel(false)
+	-- Utils.WeaponWheel()
 end)
 
 lib.onCache('vehicle', function(vehicle)
@@ -1238,7 +1256,6 @@ RegisterNetEvent('rpx-inventory:setPlayerInventory', function(currentDrops, inve
 							currentWeapon = nil
 
 							RemoveWeaponFromPed(playerPed, weapon.hash)
-							TriggerEvent('rpx-inventory:currentWeapon')
 						end)
 					end
 				elseif IsControlJustReleased(0, 24) and IsPedPerformingMeleeAction(playerPed) then
@@ -1453,7 +1470,6 @@ RegisterNUICallback('swapItems', function(data, cb)
 
 			if weaponSlot and currentWeapon then
 				currentWeapon.slot = weaponSlot
-				TriggerEvent('rpx-inventory:currentWeapon', currentWeapon)
 			end
 		end
 	elseif response then

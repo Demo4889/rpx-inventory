@@ -37,7 +37,7 @@ function server.setPlayerInventory(player, data)
 					local weight = Inventory.SlotWeight(item, v)
 					totalWeight = totalWeight + weight
 
-					inventory[v.slot] = {name = item.name, label = item.label, weight = weight, slot = v.slot, count = v.count, description = item.description, metadata = v.metadata, stack = item.stack, close = item.close}
+					inventory[v.slot] = {name = item.name, label = item.label, weight = weight, slot = v.slot, count = v.count, description = item.description, metadata = v.metadata, stack = item.unique, close = item.close}
 				end
 			end
 		end
