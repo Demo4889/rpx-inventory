@@ -55,20 +55,18 @@ return {
 		}, inventory = {
 			{ name = 'weapon_revolver_cattleman', price = 15 },
 			{ name = 'weapon_rifle_varmint', price = 20 },
-			{ name = 'revolver_ammo', price = 5 },
 			{ name = 'ammo_rifle_normal', price = 5 },
 			{ name = 'ammo_pistol_normal', price = 3 },
 			{ name = 'ammo_repeater_normal', price = 5 },
-			{ name = 'ammo_sniper', price = 10 },
 			{ name = 'ammo_shotgun', price = 5 },
 			{ name = 'ammo_revolver_normal', price = 2},
 			{ name = 'ammo_arrow', price = 1},
 		}, targets = {
 			{ ped = "u_m_m_sdexoticsshopkeeper_01", loc = vec3(-5506.36, -2964.00, -0.63), heading = 119.0, distance = 2.0 }, -- Armadillo
 			{ ped = "u_m_m_sdexoticsshopkeeper_01", loc = vec3(2717.2678, -1286.846, 49.636447), heading = 25.0, distance = 2.0 }, -- Saint Denis
+			{ ped = "u_m_m_sdexoticsshopkeeper_01", loc = vec3(2948.413, 1319.382, 44.820), heading = 67.45, distance = 2.0}, -- Annesburg
 		}
 	},
-
 	Butcher = {
 		inventory = {
 			{ name = 'consumable_jerky', price = 1 },

@@ -1207,7 +1207,7 @@ RegisterNetEvent('rpx-inventory:setPlayerInventory', function(currentDrops, inve
 				elseif weaponAmmo then
 					if IsPedShooting(playerPed) then
 						local currentAmmo
-						local durabilityDrain = Items[currentWeapon.name].durability
+						local durabilityDrain = Items[currentWeapon.name].durabilityDrain
 
 						if currentWeapon.group == `GROUP_PETROLCAN` or currentWeapon.group == `GROUP_FIREEXTINGUISHER` then
 							currentAmmo = weaponAmmo - durabilityDrain < 0 and 0 or weaponAmmo - durabilityDrain

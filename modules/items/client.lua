@@ -34,21 +34,29 @@ local inventory = exports[shared.resource]
 -----------------------------------------------------------------------------------------------
 -- Clientside item use functions
 -----------------------------------------------------------------------------------------------
-
---[[
-
-Item('bandage', function(data, slot)
-	local maxHealth = GetEntityMaxHealth(cache.ped)
-	local health = GetEntityHealth(cache.ped)
-	rpx-inventory:useItem(data, function(data)
+Item('consumable_jerky', function(data, slot)
+	local playerPed = PlayerPedId()
+	local maxHealth = GetEntityMaxHealth(playerPed)
+	local health = GetEntityHealth(playerPed)
+	inventory:useItem(data, function(data)
 		if data then
-			SetEntityHealth(cache.ped, math.min(maxHealth, math.floor(health + maxHealth / 16)))
+			SetEntityHealth(playerPed, math.min(maxHealth, math.floor(health + maxHealth / 16)))
 			lib.notify({ description = 'You feel better already' })
 		end
 	end)
 end)
 
-]]
+Item('consumable_jerky_venison', function(data, slot)
+	local playerPed = PlayerPedId()
+	local maxHealth = GetEntityMaxHealth(playerPed)
+	local health = GetEntityHealth(playerPed)
+	inventory:useItem(data, function(data)
+		if data then
+			SetEntityHealth(playerPed, math.min(maxHealth, math.floor(health + maxHealth / 16)))
+			lib.notify({ description = 'You feel better already' })
+		end
+	end)
+end)
 
 Item('goldpan', function(data, slot)
 	inventory:useItem(data, function(data)
@@ -65,7 +73,6 @@ Item('campkit', function(data, slot)
 		end
 	end)
 end)
-
 
 -----------------------------------------------------------------------------------------------
 

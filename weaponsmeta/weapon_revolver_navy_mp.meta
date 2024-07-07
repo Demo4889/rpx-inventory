@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Infos targetBlob="mp006 - Navy Revolver">
+  <CWeaponInfo>
+    <Name>WEAPON_REVOLVER_NAVY</Name>
+    <DamageModes>
+      <Item>
+        <Name>DM_REVOLVER</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_HIGH_VELOCITY</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_SPLIT_POINT</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_EXPRESS</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_EXPRESS_EXPLOSIVE</Name>
+		<PlayerDamagedByPlayerModifier value="1.400000" />
+      </Item>
+    </DamageModes>
+    <WeaponHeadShotDistance>
+      <MinHeadShotDistanceAI value="1.000000" />
+      <MaxHeadShotDistanceAI value="150.000000" />
+      <MinHeadShotDistancePlayer value="0.000000" />
+      <MaxHeadShotDistancePlayer value="75.000000" />
+    </WeaponHeadShotDistance>
+    <WeaponDamageModifiers>
+      <PlayerDamagedByPlayerModifier value="1.500000" />
+      <PlayerDamagedByAIModifier value="1.500000" />
+      <AIDamagedByPlayerModifier value="1.000000" />
+    </WeaponDamageModifiers>
+  </CWeaponInfo>
+  <CWeaponInfo>
+    <Name>WEAPON_REVOLVER_NAVY_CROSSOVER</Name>
+    <DamageModes>
+      <Item>
+        <Name>DM_REVOLVER</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_HIGH_VELOCITY</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_SPLIT_POINT</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_EXPRESS</Name>
+      </Item>
+      <Item>
+        <Name>DM_AMMO_EXPRESS_EXPLOSIVE</Name>
+		<PlayerDamagedByPlayerModifier value="1.400000" />
+      </Item>
+    </DamageModes>
+    <WeaponHeadShotDistance>
+      <MinHeadShotDistanceAI value="1.000000" />
+      <MaxHeadShotDistanceAI value="150.000000" />
+      <MinHeadShotDistancePlayer value="0.000000" />
+      <MaxHeadShotDistancePlayer value="75.000000" />
+    </WeaponHeadShotDistance>
+    <WeaponDamageModifiers>
+      <PlayerDamagedByPlayerModifier value="1.500000" />
+      <PlayerDamagedByAIModifier value="1.500000" />
+      <AIDamagedByPlayerModifier value="1.000000" />
+    </WeaponDamageModifiers>
+  </CWeaponInfo>
+</Infos>

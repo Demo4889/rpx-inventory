@@ -4,13 +4,13 @@
 function server.hasGroup(inv, group)
 	if type(group) == 'table' then
 		for name, rank in pairs(group) do
-			local groupRank = inv.player.groups[name]
+			local groupRank = inv.player.job[name]
 			if groupRank and groupRank >= (rank or 0) then
 				return name, groupRank
 			end
 		end
 	else
-		local groupRank = inv.player.groups[group]
+		local groupRank = inv.player.gang[group]
 		if groupRank then
 			return group, groupRank
 		end
@@ -19,16 +19,16 @@ end
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function server.setPlayerData(player)
-	if not player.groups then
-		warn(("server.setPlayerData did not receive any groups for '%s'"):format(player?.name or GetPlayerName(player.source)))
+	if not player.job then
+		warn(("server.setPlayerData did not receive any job for '%s'"):format(player?.name or GetPlayerName(player.source)))
 	end
 
 	return {
 		source = player.source,
-		name = player.name,
-		groups = player.groups or {},
-		sex = player.sex,
-		dateofbirth = player.dateofbirth,
+		name = player.charinfo.fullname,
+		groups = player.job or {},
+		sex = player.charinfo.gender,
+		dateofbirth = player.charinfo.age,
 	}
 end
 

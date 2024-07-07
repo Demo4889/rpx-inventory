@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Infos targetBlob="mp007 - Elephant Rifle">
+	<CWeaponInfo>
+		<Name>WEAPON_RIFLE_ELEPHANT</Name>
+		<WeaponHeadShotDistance>
+			<MinHeadShotDistanceAI value="1.000000" />
+			<MaxHeadShotDistanceAI value="150.000000" />
+			<MinHeadShotDistancePlayer value="0.000000" />
+			<MaxHeadShotDistancePlayer value="90.000000" />
+			<MaxHeadShotDistanceToPlayerWithScope value="1000.000000" />
+		</WeaponHeadShotDistance>
+		<WeaponDamageModifiers>
+			<PlayerDamagedByPlayerModifier value="1.400000" />
+			<PlayerDamagedByAIModifier value="1.400000" />
+			<AIDamagedByPlayerModifier value="1.000000" />
+		</WeaponDamageModifiers>
+	</CWeaponInfo>
+</Infos>
